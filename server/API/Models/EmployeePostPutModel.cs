@@ -1,4 +1,5 @@
 ﻿using API.Core.Entities;
+using System.Text.RegularExpressions;
 
 namespace Solid.API.Models
 {
@@ -6,11 +7,9 @@ namespace Solid.API.Models
     {
         public int Id { get; set; }
         public string? FirstName { get; set; }
-        public string? LastName { get; set; }
+        public string? Surname { get; set; }
         public string? IdentityNumber { get; set; }
         public GENDER Gender { get; set; }
-        //public string BirthDate { get; set; } = "";
-        //public string StartWorking { get; set; } = "";
         public DateOnly BirthDate { get; set; }
         public DateOnly StartWorking { get; set; }
         public List<Role> Roles { get; set; } = [];

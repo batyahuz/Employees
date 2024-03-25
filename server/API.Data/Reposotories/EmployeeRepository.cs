@@ -21,7 +21,8 @@ namespace Solid.Data.Reposotories
 
         public async Task<Employee?> GetEmployeeByIdAsync(int id)
         {
-            return await _context.Employees.FindAsync(id);
+            var employees = await GetEmployeesAsync();
+            return employees.First(e => e.Id == id);
         }
 
         public async Task<Employee?> AddEmployeeAsync(Employee employee)
