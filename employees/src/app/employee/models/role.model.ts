@@ -1,6 +1,8 @@
+import { RoleName } from "./role.name.model";
+
 export class Role {
     public id: number;
-    public name: string;
+    public name: RoleName;
     public isManagerial: boolean;
-    public StartRole: Date;
+    public startRole: Date;
 }

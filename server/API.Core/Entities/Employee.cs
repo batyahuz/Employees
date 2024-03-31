@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Solid.Core.Entities;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,7 +16,7 @@ namespace API.Core.Entities
         [Key]
         public int Id { get; set; }
         public string? FirstName { get; set; }
-        public string? Surname { get; set; }
+        public string? LastName { get; set; }
 
         private string? identityNumber;
         public string? IdentityNumber
@@ -34,6 +35,7 @@ namespace API.Core.Entities
         public bool Status { get; set; }
         public DateOnly StartWorking { get; set; }
         public List<Role> Roles { get; set; } = [];
+        public Team? Team { get; set; }
 
         public Employee()
         {
@@ -45,18 +47,13 @@ namespace API.Core.Entities
             if (other is not null)
             {
                 this.FirstName = other.FirstName;
-                this.Surname = other.Surname;
+                this.LastName = other.LastName;
                 this.IdentityNumber = other.IdentityNumber;
                 this.Gender = other.Gender;
                 this.BirthDate = other.BirthDate;
                 this.Status = other.Status;
                 this.StartWorking = other.StartWorking;
                 this.CopyRoles(other.Roles);
-                //this.Roles.RemoveAll(x => x != null);
-                //other.Roles.ForEach(r => this.Roles.Add(r));
-                //other.Roles.Clear();
-                //this.Roles = other.Roles;
-                //other.Roles.RemoveAll(x => x != null);
             }
         }
 

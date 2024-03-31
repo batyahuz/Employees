@@ -7,7 +7,7 @@ namespace Solid.API.Models
     {
         public int Id { get; set; }
         public string? FirstName { get; set; }
-        public string? Surname { get; set; }
+        public string? LastName { get; set; }
         public string? IdentityNumber { get; set; }
         public GENDER Gender { get; set; }
         public DateOnly BirthDate { get; set; }

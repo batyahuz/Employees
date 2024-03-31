@@ -4,6 +4,7 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Solid.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240331192933_add Team")]
+    partial class addTeam
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,8 +78,8 @@ namespace Solid.Data.Migrations
                     b.Property<bool>("IsManagerial")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("NameId")
-                        .HasColumnType("int");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateOnly>("StartRole")
                         .HasColumnType("date");
@@ -84,8 +87,6 @@ namespace Solid.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
-
-                    b.HasIndex("NameId");
 
                     b.ToTable("Roles");
                 });
@@ -119,7 +120,7 @@ namespace Solid.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teams");
+                    b.ToTable("Team");
                 });
 
             modelBuilder.Entity("API.Core.Entities.Employee", b =>
@@ -136,12 +137,6 @@ namespace Solid.Data.Migrations
                     b.HasOne("API.Core.Entities.Employee", null)
                         .WithMany("Roles")
                         .HasForeignKey("EmployeeId");
-
-                    b.HasOne("Solid.Core.Entities.RoleName", "Name")
-                        .WithMany()
-                        .HasForeignKey("NameId");
-
-                    b.Navigation("Name");
                 });
 
             modelBuilder.Entity("API.Core.Entities.Employee", b =>

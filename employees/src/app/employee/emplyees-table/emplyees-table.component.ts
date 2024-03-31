@@ -8,8 +8,7 @@ import { EmployeeEditComponent } from '../employee-edit/employee-edit.component'
 @Component({
   selector: 'app-emplyees-table',
   templateUrl: './emplyees-table.component.html',
-  styleUrl: './emplyees-table.component.css',
-  providers: [EmployeeService]
+  styleUrl: './emplyees-table.component.css'
 })
 export class EmplyeesTableComponent implements OnInit {
   employees: Employee[];
@@ -19,8 +18,11 @@ export class EmplyeesTableComponent implements OnInit {
   }
 
   openEditEmployeeDialog(employeeToEdit: Employee): void {
+    console.log('employeeToEdit', employeeToEdit);
+    this._router.navigate([`/employees/edit/${employeeToEdit.id}`])
+
     // this._router.navigate(['/employee/edit/' + emp.id])
-    
+
     // const dialogRef = this.dialog.open(EmployeeEditComponent, {
     //   width: '400px',
     //   data: { ...employeeToEdit }

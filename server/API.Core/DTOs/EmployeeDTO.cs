@@ -12,7 +12,7 @@ namespace Solid.Core.DTOs
     {
         public int Id { get; set; }
         public string? FirstName { get; set; }
-        public string? Surname { get; set; }
+        public string? LastName { get; set; }
         public string? IdentityNumber { get; set; }
         public GENDER Gender { get; set; }
         //public string BirthDate { get; set; } = "";

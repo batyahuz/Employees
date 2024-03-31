@@ -13,6 +13,7 @@ namespace API.Data
 {
     public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
     {
+        public DbSet<Team> Teams { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<RoleName> RoleNames { get; set; }

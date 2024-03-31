@@ -2,16 +2,22 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Employee } from './models/employee.model';
+import { RoleName } from './models/role.name.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
 
-  private readonly apiEmp = "api/Employee";
+  private readonly api = "api/";
+  private readonly apiEmp = this.api + "Employee";
 
   getEmployees(status: boolean | null = null): Observable<Employee[]> {
     return this._http.get<Employee[]>(this.apiEmp + '?status=' + (status || ''))
+  }
+
+  getEmployeeById(id: number, status: boolean | null = null): Observable<any> {
+    return this._http.get(this.apiEmp + '/' + id + (status ? '?status=' + status : ''))
   }
 
   addEmployee(emp: Employee): Promise<any> {
@@ -35,5 +41,8 @@ export class EmployeeService {
     })
   }
 
+  getRolesNames(): Observable<RoleName[]> {
+    return this._http.get<RoleName[]>(this.api + 'Role')
+  }
   constructor(private _http: HttpClient) { }
 }

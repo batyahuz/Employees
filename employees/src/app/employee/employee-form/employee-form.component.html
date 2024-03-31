@@ -1,1 +1,258 @@
 <p>employee-form works!</p>
+<form id="employeeForm" [formGroup]="employeeForm" (ngSubmit)="submit()">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center turquoise">{{submitMessage}} Employee</h5>
+                        <ng-container class="card" *ngIf="employee">
+                            <div class="card-body">
+                                <!-- firstName -->
+                                <div class="form-group form-floating mb-3">
+                                    <input class="form-control"
+                                        [ngClass]="{'is-invalid': employeeForm.controls['firstName'].touched && employeeForm.controls['firstName'].errors}"
+                                        type="text" id="firstName" formControlName="firstName" name="firstName" />
+                                    <label for="firstName">First-Name:</label>
+                                    <ng-container
+                                        *ngIf="employeeForm.controls['firstName'].touched && employeeForm.controls['firstName'].errors">
+                                        <div class="alert alert-danger"
+                                            *ngIf="employeeForm.controls['firstName'].errors['required']">
+                                            This field is required</div>
+                                    </ng-container>
+                                </div>
+                                <!-- lastName -->
+                                <div class="form-group form-floating mb-3">
+                                    <input class="form-control"
+                                        [ngClass]="{'is-invalid': employeeForm.controls['lastName'].touched && employeeForm.controls['lastName'].errors}"
+                                        type="text" id="lastName" formControlName="lastName" name="lastName" />
+                                    <label for="lastName">Last-Name:</label>
+                                    <ng-container
+                                        *ngIf="employeeForm.controls['lastName'].touched && employeeForm.controls['lastName'].errors">
+                                        <div class="alert alert-danger"
+                                            *ngIf="employeeForm.controls['lastName'].errors['required']">
+                                            This field is required</div>
+                                    </ng-container>
+                                </div>
+                                <!-- identityNumber -->
+                                <div class="form-group form-floating mb-3">
+                                    <input class="form-control"
+                                        [ngClass]="{'is-invalid': employeeForm.controls['identityNumber'].touched && employeeForm.controls['identityNumber'].errors}"
+                                        type="text" id="identityNumber" formControlName="identityNumber"
+                                        name="identityNumber" />
+                                    <label for="identityNumber">Identity-Number:</label>
+                                    <ng-container
+                                        *ngIf="employeeForm.controls['identityNumber'].touched && employeeForm.controls['identityNumber'].errors">
+                                        <div class="alert alert-danger"
+                                            *ngIf="employeeForm.controls['identityNumber'].errors['required']">
+                                            This field is required</div>
+                                        <div class="alert alert-danger"
+                                            *ngIf="employeeForm.controls['identityNumber'].errors['pattern']">
+                                            This field's length must be 8-9 digits</div>
+                                    </ng-container>
+                                </div>
+                                <!-- gender -->
+                                <div class="card forInnerCard">
+                                    <div class="card-body">
+                                        <div class="form-group form-floating mb-3">
+                                            <div id="gender" class="forSelectLable" for="gender">Select Gender:
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gender" id="male"
+                                                    [value]="0" formControlName="gender">
+                                                <label class="form-check-label" for="male"> 🧑 male </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gender" id="female"
+                                                    [value]="1" formControlName="gender">
+                                                <label class="form-check-label" for="female"> 👩 female </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- birthDate -->
+                                <div class="form-group form-floating mb-3">
+                                    <input class="form-control"
+                                        [ngClass]="{'is-invalid': employeeForm.controls['birthDate'].touched && employeeForm.controls['birthDate'].errors}"
+                                        type="date" id="birthDate" formControlName="birthDate" name="birthDate" />
+                                    <label for="birthDate">Birth-Date:</label>
+                                    <ng-container
+                                        *ngIf="employeeForm.controls['birthDate'].touched && employeeForm.controls['birthDate'].errors">
+                                        <div class="alert alert-danger"
+                                            *ngIf="employeeForm.controls['birthDate'].errors['required']">
+                                            This field is required</div>
+                                    </ng-container>
+                                </div>
+                                <!-- startWorking -->
+                                <div class="form-group form-floating mb-3">
+                                    <input class="form-control"
+                                        [ngClass]="{'is-invalid': employeeForm.controls['startWorking'].touched && employeeForm.controls['startWorking'].errors}"
+                                        type="date" id="startWorking" formControlName="startWorking"
+                                        name="startWorking" />
+                                    <label for="startWorking">Start-Working-Date:</label>
+                                    <ng-container
+                                        *ngIf="employeeForm.controls['startWorking'].touched && employeeForm.controls['startWorking'].errors">
+                                        <div class="alert alert-danger"
+                                            *ngIf="employeeForm.controls['startWorking'].errors['required']">
+                                            This field is required</div>
+                                    </ng-container>
+                                </div>
+                                <!-- roles -->
+                                <div class="card forInnerCard">
+                                    <div class="card-body">
+                                        <h6 class="card-title text-center turquoise">Roles</h6>
+                                        <button class="btn btn-primary mb-2" (click)="addRole()">
+                                            <i class="bi bi-file-earmark-plus-fill">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-file-earmark-plus-fill"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0" />
+                                                </svg>
+                                            </i>
+                                            Add Role
+                                        </button>
+                                        <div formArrayName="roles">
+                                            <div *ngFor="let item of rolesArray.controls; let i = index" class="mb-3" [formGroupName]="i">
+                                                <div class="form-group form-floating mb-3 card blue-card">
+                                                    <!-- <button (click)="iitem(item)">jkl;jlkj</button> -->
+                                                    <div class="card-body">
+                                                        <div class="d-flex justify-content-start forSelectLable"
+                                                            for="gender">
+                                                            <div>Role {{i + 1}}: </div>
+                                                            <button class="btn btn-danger" (click)="removeRole(i)">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor" class="bi bi-trash"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                                                    <path
+                                                                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                                                </svg>
+                                                                Delete
+                                                            </button>
+                                                        </div>
+                                                        <div class="form-group form-floating mb-3">
+                                                            <select class="form-select" formControlName="name">
+                                                                <option [disabled]="(1==1)? true : false" [value]="0">
+                                                                    choose role </option>
+                                                                <option *ngFor="let role of availableRolesName"
+                                                                    [value]="role.id">
+                                                                    {{ role.name }}
+                                                                </option>
+                                                            </select>
+                                                            <label for="categoryId">Role Name:</label>
+                                                        </div>
+                                                        <div class="form-group form-floating mb-3 card">
+                                                            <div class="card-body">
+                                                                <div id="isManagerial" class="forSelectLable">
+                                                                    Is Role Managerial:
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" formControlName="isManagerial"
+                                                                        id="yesManagerial" [value]="true">
+                                                                    <label class="form-check-label" for="yesManagerial">
+                                                                        Yes
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" formControlName="isManagerial"
+                                                                        id="noManagerial" [value]="false">
+                                                                    <label class="form-check-label" for="noManagerial">
+                                                                        No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group form-floating mb-3">
+                                                            <input type="date" class="form-control"
+                                                            formControlName="startRole"
+                                                                [ngClass]="{'is-invalid': employeeForm.get('roles.' + i).touched && employeeForm.get('roles.' + i).errors}" />
+                                                            <label for="">Start Role Date</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-success" [disabled]="employeeForm.invalid">
+                                        {{submitMessage}} Employee
+                                    </button>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--  <app-input-field
+                                    [label]="'First-Name:'"
+                                    [placeholder]="'Enter first name'"
+                                    [form]="employeeForm"
+                                    [controlName]="'firstName'"
+                                    >
+                                </app-input-field>
+                                
+                                <app-input-field
+                                    [label]="'Last-Name:'"
+                                    [placeholder]="'Enter last name'"
+                                    [form]="employeeForm"
+                                    [controlName]="'lastName'"
+                                    >
+                                </app-input-field>
+                                
+                                <app-input-field
+                                    [label]="'Identity-Number:'"
+                                    [placeholder]="'Enter identity number'"
+                                    [form]="employeeForm"
+                                    [controlName]="'identityNumber'"
+                                    [validationErrors]="{
+                                        'pattern': 'This field\'s length must be 8-9 digits'
+                                    }">
+                                </app-input-field>
+
+                                <app-input-field
+                                    [label]="'Select Gender:'"
+                                    [typeString]="'radio'"
+                                    [placeholder]="'Select gender'"
+                                    [form]="employeeForm"
+                                    [controlName]="'gender'"
+                                    [validationErrors]="{}">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="male"
+                                            [value]="0" formControlName="gender">
+                                        <label class="form-check-label" for="male"> 🧑 male </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="female"
+                                            [value]="1" formControlName="gender">
+                                        <label class="form-check-label" for="female"> 👩 female </label>
+                                    </div>
+                                </app-input-field>
+                                
+                                <app-input-field
+                                    [label]="'Birth-Date:'"
+                                    [typeString]="'date'"
+                                    [placeholder]="'Enter birth date'"
+                                    [form]="employeeForm"
+                                    [controlName]="'birthDate'"
+                                    [validationErrors]="{
+                                        'required': 'This field is required'
+                                    }">
+                                </app-input-field>
+                                
+                                <app-input-field
+                                    [label]="'Start-Working-Date:'"
+                                    [typeString]="'date'"
+                                    [placeholder]="'Enter start working date'"
+                                    [form]="employeeForm"
+                                    [controlName]="'startWorking'"
+                                    [validationErrors]="{
+                                        'required': 'This field is required'
+                                    }">
+                                </app-input-field>
+ -->

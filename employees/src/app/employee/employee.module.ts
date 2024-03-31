@@ -8,12 +8,25 @@ import { CommonModule } from '@angular/common';
 import { EmployeeAddComponent } from './employee-add/employee-add.component';
 import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputFieldComponent } from '../../assets/input-field/input-field.component';
 // import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
-  declarations: [EmplyeesTableComponent, EmployeeAddComponent, EmployeeEditComponent, EmployeeFormComponent],
-  imports: [RouterModule.forChild(routes), HttpClientModule, CommonModule/*, MatDialogModule*/],
-  providers: []
+  declarations: [EmplyeesTableComponent,
+    EmployeeAddComponent,
+    EmployeeEditComponent,
+    EmployeeFormComponent,
+  ],
+  imports: [RouterModule.forChild(routes),
+    InputFieldComponent,
+    HttpClientModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
+    /*, MatDialogModule*/
+  ],
+  providers: [EmployeeService]
 })
 export class EmployeeModule { }

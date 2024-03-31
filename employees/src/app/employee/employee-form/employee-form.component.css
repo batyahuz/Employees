@@ -1,0 +1,17 @@
+.forInnerCard {
+    margin: auto auto 1rem auto;
+}
+
+.form-check-input:checked {
+    background-color: #198754;
+    border-color: #198754;
+}
+
+.forSelectLable{
+    color: rgba(var(--bs-body-color-rgb), .65);
+    transform: scale(.85) translateY(-.5rem) translateX(-1.5rem);
+}
+
+.blue-card{
+    border-color: #0d6efd !important;
+}
