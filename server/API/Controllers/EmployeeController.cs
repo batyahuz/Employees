@@ -47,9 +47,9 @@ namespace API.Controllers
             {
                 return UnprocessableEntity("Employee has no logical dates: " + ex);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return Content(ex.ToString());
+                return Content("Exception" + ex.ToString());
             }
             return Created("/api/employee/" + employee.Id, _mapper.Map<EmployeeDTO>(employee));
         }

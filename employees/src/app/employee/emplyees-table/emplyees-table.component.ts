@@ -14,7 +14,7 @@ export class EmplyeesTableComponent implements OnInit {
   employees: Employee[];
 
   getEmployees(): void {
-    this._service.getEmployees().subscribe(e => this.employees = e)
+    this._service.getEmployees(true).subscribe(e => this.employees = e)
   }
 
   openEditEmployeeDialog(employeeToEdit: Employee): void {

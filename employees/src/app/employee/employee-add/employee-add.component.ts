@@ -15,7 +15,9 @@ export class EmployeeAddComponent implements OnInit {
     this._service.addEmployee(employeeToAdd).then(() => {
       //swel success
       this._router.navigate(['/'])
-    }).catch(() => {
+    }).catch((data) => {
+      console.error('error in add..', data);
+
       //swel error
     })
   }

@@ -45,9 +45,7 @@ export class EmployeeFormComponent implements OnInit {
         gender: [this.employee.gender, [Validators.required]],
         birthDate: [this.employee.birthDate, [Validators.required]],
         startWorking: [this.employee.startWorking, [Validators.required]],
-        roles: this.formBuilder.array(this.employee.roles.map(role => this.createRoleFormGroup(role))
-        , { validators: this.requireAllFieldsOrNone1 }
-        )
+        roles: this.formBuilder.array(this.employee.roles.map(role => this.createRoleFormGroup(role)))
       });
     }
   }
@@ -59,8 +57,17 @@ export class EmployeeFormComponent implements OnInit {
   rolesNames: RoleName[];
 
   get availableRolesName(): RoleName[] {
+    const availables = this.rolesNames?.filter(r => {
+      for (let index = 0; index < this.rolesArray.value.length; index++) {
+        if (this.rolesArray.value[index].nameId === r.id)
+          return false
+      }
+      return true
+    })
     // const rolesArray: string[] = this.rolesArray.value.map((role: Role) => role.name);
-    console.log('rolesArray', this.rolesArray.value, 'employeeForm', JSON.stringify(this.employeeForm.value));
+    // console.log('rolesArray', this.rolesArray.value, 'employeeForm', JSON.stringify(this.employeeForm.value));
+    console.log('available', availables);
+
     return this.rolesNames
     // return this.rolesNames?.filter(role => !rolesArray.includes(role.name));
   }
@@ -71,73 +78,41 @@ export class EmployeeFormComponent implements OnInit {
       nameId: [role.nameId, Validators.required],
       isManagerial: [role.isManagerial, Validators.required],
       startRole: [role.startRole, Validators.required]
+    });
+  }
+
+  isArrayHasValues(array: unknown[]): boolean {
+    return Object.values(array).every((val, i) => i === 0 || (val !== null && val !== ''))
+  }
+
+  isArrayAllEmpty(array: unknown[]): boolean {
+    return Object.values(array).every((val, i) => i === 0 || val === null || val === '')
+
+  }
+
+  requireAllFieldsOrNone(group: AbstractControl): boolean {
+    return Object.values(group.value).every(array =>
+      this.isArrayHasValues(Object.values(array)) || this.isArrayAllEmpty(Object.values(array)))
+  }
+
+  isFormValid(): boolean {
+    //console.log('in is valid');
+
+    if (this.employeeForm.invalid) {
+      const invalidFields = Object.keys(this.employeeForm.controls).filter(controlName => this.employeeForm.get(controlName).invalid);
+      //console.log('invalidFields', invalidFields);
+
+      if (invalidFields.length > 1 || invalidFields[0] !== 'roles' || !this.requireAllFieldsOrNone(this.rolesArray)) {
+        //console.log('return false');
+        return false
+      }
     }
-    // , { validators: this.requireAllFieldsOrNone }
-    );
-  }
-
-  // validateRolesArray: השךן = (array: AbstractControl[]): ValidationErrors | null => {
-  //   if (array.length === 0 || array.every(control => Object.values((control as any).value).every(val => val === ''))) {
-  //     return null;
-  //   }
-
-  //   return { required: true };
-  // };
-
-
-  // validateRolesArray: ValidatorFn = (array: AbstractControl): ValidationErrors => {
-  // };
-  // (array: AbstractControl[]): ValidationErrors | null {
-  //   // if (array.length === 0 || array.every(group => Object.values(group.value).every(val => val === ''))) {
-  //   if (array.length === 0 || array.every(group => this.requireAllFieldsOrNone(group) === null)) {
-  //     return null;
-  //   }
-  //   return { required: true };
-  // }
-
-  // validateRolesArray: ValidatorFn = (array: AbstractControl): ValidationErrors | null => {
-  //   const rolesArray = array as FormArray;
-
-  //   // בדיקת תקינות לכל אחד מהפרטים ב-FomrArray
-  //   for (const control of rolesArray.controls) {
-  //     if (control.invalid) {
-  //       return { invalidRole: true };
-  //     }
-  //   }
-
-  //   return null; // אם כל הפרטים ב-FomrArray תקינים
-  // };
-  requireAllFieldsOrNone1(group: AbstractControl): ValidationErrors | null {
-    console.log('group1', group.value);
-    console.log('object group', Object.values(group.value));
-    const hasValues = Object.values(group.value).every(array => Object.values(array).every((val, i) => i === 0 || (val !== null && val !== '')))
-    const allEmpty = Object.values(group.value).every(array => Object.values(array).every((val, i) => i === 0 || val === null || val === ''))
-    // const hasValues = Object.values(group.value).every((val, i) => i === 0 || (val !== null && val !== ''))
-    // const allEmpty = Object.values(group.value).every((val, i) => i === 0 || val === null || val === '')
-    console.log('hasValues', hasValues, '\nallEmpty', allEmpty);
-    const r =  hasValues || allEmpty ? null : { required: true };
-    console.log('r',r);
-    
-    return r;
-    // return hasValues || allEmpty ? null : { required: true };
-  }
-  requireAllFieldsOrNone(group: AbstractControl): ValidationErrors | null {
-    console.log('group2', group.value);
-    console.log('object group', Object.values(group.value));
-    // const hasValues = Object.values(group.value).every(array => Object.values(array).every((val, i) => i === 0 || (val !== null && val !== '')))
-    // const allEmpty = Object.values(group.value).every(array => Object.values(array).every((val, i) => i === 0 || val === null || val === ''))
-    const hasValues = Object.values(group.value).every((val, i) => i === 0 || (val !== null && val !== ''))
-    const allEmpty = Object.values(group.value).every((val, i) => i === 0 || val === null || val === '')
-    console.log('hasValues', hasValues, '\nallEmpty', allEmpty);
-
-    const r =  hasValues || allEmpty ? null : { required: true };
-    console.log('r',r);
-    
-    return r;
+    //console.log('return true');
+    return true;
   }
 
   addRole() {
-    console.log('in add role');
+    //console.log('in add role');
     this.rolesArray.push(this.createRoleFormGroup(new Role()));
   }
 
@@ -146,13 +121,24 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   submit() {
-    console.log('submit!! value:', this.employeeForm.value);
-    if (this.employeeForm.invalid) {
+    //console.log('submit!! value:', this.employeeForm.value);
+    if (!this.isFormValid()) {
       //swel all fields are required
       return;
     }
 
-    console.log('this.employeeForm.value', this.employeeForm.value);
+    for (let index = this.rolesArray.length - 1; index >= 0; index--) {
+      if (this.isArrayAllEmpty(this.employeeForm.value.roles[index]))
+        this.employeeForm.value.roles.pop()
+    }
+    if (this.rolesArray.value?.length === 0) {
+      //console.log('remove roles');
+
+      this.employeeForm.removeControl('roles')
+      //console.log('this.employeeForm.value with out roles', JSON.stringify(this.employeeForm.value));
+    }
+
+    //console.log('this.employeeForm.value', JSON.stringify(this.employeeForm.value));
     this.onSubmit.emit(this.employeeForm.value);
 
   }
@@ -172,19 +158,24 @@ export class EmployeeFormComponent implements OnInit {
 
 
   fff() {
-    console.log('value', this.employeeForm.value, 'valid', this.employeeForm.valid);
+    //console.log('value', this.employeeForm.value, 'valid', this.employeeForm.valid);
     if (this.employeeForm.invalid) {
       const invalidFields = Object.keys(this.employeeForm.controls).filter(controlName => this.employeeForm.get(controlName).invalid);
-      console.log('Invalid fields:', invalidFields);
+      //console.log('Invalid fields:', invalidFields);
     }
 
     for (const control of this.rolesArray.controls) {
       if (control.invalid) {
-        console.log('Validation errors for role:', control.value);
-        console.log(control.errors);
+        //console.log('Validation value for role:', control.value);
+        //console.log('Validation errors for role:', control.errors);
       }
     }
-    console.log('is valid array?',this.rolesArray.valid);
-    
+    //console.log('is valid array?', this.rolesArray.valid);
+
+    //console.log('errors', this.employeeForm.errors);
+    //console.log('validator', this.employeeForm.validator);
+
+
+
   }
 }

@@ -113,7 +113,7 @@
                                             Add Role
                                         </button>
                                         <div formArrayName="roles">
-                                            <div *ngFor="let item of rolesArray.controls; let i = index" class="mb-3"
+                                            <div *ngFor="let item of rolesArray?.controls; let i = index" class="mb-3"
                                                 [formGroupName]="i">
                                                 <div class="form-group form-floating mb-3 card blue-card">
                                                     <div class="card-body">
@@ -191,7 +191,7 @@
                                     </div>
                                 </div>
                                 <div class="d-grid gap-2">
-                                    <button type="submit" class="btn btn-success" [disabled]="employeeForm.invalid">
+                                    <button type="submit" class="btn btn-success" [disabled]="!isFormValid()">
                                         {{submitMessage}} Employee
                                     </button>
                                 </div>
