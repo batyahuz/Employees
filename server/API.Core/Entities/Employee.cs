@@ -15,8 +15,8 @@ namespace API.Core.Entities
     {
         [Key]
         public int Id { get; set; }
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
+        public required string FirstName { get; set; }
+        public required string LastName { get; set; }
 
         private string? identityNumber;
         public string? IdentityNumber
@@ -24,7 +24,7 @@ namespace API.Core.Entities
             get => identityNumber;
             set
             {
-                if (value?.Length < 8 || value?.Length > 9)
+                if (value is null || value?.Length < 8 || value?.Length > 9)
                     throw new ArgumentException("IdentityNumber");
                 identityNumber = value;
             }
@@ -40,6 +40,23 @@ namespace API.Core.Entities
         public Employee()
         {
             Status = true;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is not Employee)
+                return false;
+            var emp = (Employee)obj;
+            return emp != null &&
+                FirstName.Equals(emp.FirstName) &&
+                LastName.Equals(emp.LastName) &&
+                (IdentityNumber is null || IdentityNumber.Equals(emp.IdentityNumber)) &&
+                Gender.Equals(emp.Gender) &&
+                BirthDate.Equals(emp.BirthDate) &&
+                Status.Equals(emp.Status) &&
+                StartWorking.Equals(emp.StartWorking) &&
+                Roles.SequenceEqual(emp.Roles) &&
+                (Team is null || Team.Equals(Team));
         }
 
         public void CopyFields(Employee other)

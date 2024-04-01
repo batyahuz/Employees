@@ -12,6 +12,6 @@ namespace Solid.API.Models
         public GENDER Gender { get; set; }
         public DateOnly BirthDate { get; set; }
         public DateOnly StartWorking { get; set; }
-        public List<Role> Roles { get; set; } = [];
+        public List<RolePostPutModel> Roles { get; set; } = [];
     }
 }

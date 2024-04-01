@@ -8,17 +8,10 @@ namespace Solid.API.Mapping
     {
         public ApiMappingProfile()
         {
-            CreateMap<EmployeePostPutModel, Employee>().ReverseMap();
-                //.ForMember(e => e.BirthDate, opt => opt.MapFrom(ePostPut => DateOnly.Parse(ePostPut.BirthDate)))
-                //.ForMember(e => e.StartWorking, opt => opt.MapFrom(ePostPut => DateOnly.Parse(ePostPut.StartWorking)));
+            CreateMap<EmployeePostPutModel, Employee>().ReverseMap()
+                .ForMember(dest => dest.Roles, opt => opt.MapFrom(src => src.Roles));
 
-            //CreateMap<Employee, EmployeePostPutModel>()
-            //    .ForMember(ePostPut => ePostPut.BirthDate, opt => opt.MapFrom(e => e.BirthDate.ToString("yyyy-MM-dd")))
-            //    .ForMember(ePostPut => ePostPut.StartWorking, opt => opt.MapFrom(e => e.StartWorking.ToString("yyyy-MM-dd")));
-
-            //CreateMap<EmployeePostPutModel, Employee>().ReverseMap();
-                //.ForMember(e => e.BirthDate, opt => opt.MapFrom(ePostPut => DateOnly.Parse(ePostPut.BirthDate)))
-                //.ForMember(e => e.StartWorking, opt => opt.MapFrom(ePostPut => DateOnly.Parse(ePostPut.StartWorking)));
+            CreateMap<RolePostPutModel, Role>().ReverseMap();
         }
     }
 }

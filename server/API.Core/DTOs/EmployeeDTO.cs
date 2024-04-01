@@ -15,8 +15,6 @@ namespace Solid.Core.DTOs
         public string? LastName { get; set; }
         public string? IdentityNumber { get; set; }
         public GENDER Gender { get; set; }
-        //public string BirthDate { get; set; } = "";
-        //public string StartWorking { get; set; } = "";
         public DateOnly BirthDate { get; set; }
         public DateOnly StartWorking { get; set; }
         public List<Role> Roles { get; set; } = [];

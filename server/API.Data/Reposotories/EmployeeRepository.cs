@@ -16,7 +16,7 @@ namespace Solid.Data.Reposotories
 
         public async Task<IEnumerable<Employee>> GetEmployeesAsync()
         {
-            return await _context.Employees.Include(e => e.Roles).ToListAsync();
+            return await _context.Employees.Include(e => e.Roles).ThenInclude(r => r.Name).ToListAsync();
         }
 
         public async Task<Employee?> GetEmployeeByIdAsync(int id)
@@ -27,6 +27,10 @@ namespace Solid.Data.Reposotories
 
         public async Task<Employee?> AddEmployeeAsync(Employee employee)
         {
+            if(_context.Employees.Contains(employee))
+            {
+                throw new NotSupportedException("Employee's details are already exist");
+            }
             await _context.Employees.AddAsync(employee);
             await _context.SaveChangesAsync();
             return employee;

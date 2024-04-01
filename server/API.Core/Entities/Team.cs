@@ -10,7 +10,7 @@ namespace Solid.Core.Entities
     public class Team
     {
         public int Id { get; set; }
-        public string? Name { get; set; }
+        public required string Name { get; set; }
         public List<Employee> Employees { get; set; } = [];
     }
 }

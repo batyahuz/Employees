@@ -1,5 +1,5 @@
 <p>employee-form works!</p>
-<form id="employeeForm" [formGroup]="employeeForm" (ngSubmit)="submit()">
+<form id="employeeForm" [formGroup]="employeeForm" (change)="fff()" (ngSubmit)="submit()">
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -113,12 +113,11 @@
                                             Add Role
                                         </button>
                                         <div formArrayName="roles">
-                                            <div *ngFor="let item of rolesArray.controls; let i = index" class="mb-3" [formGroupName]="i">
+                                            <div *ngFor="let item of rolesArray.controls; let i = index" class="mb-3"
+                                                [formGroupName]="i">
                                                 <div class="form-group form-floating mb-3 card blue-card">
-                                                    <!-- <button (click)="iitem(item)">jkl;jlkj</button> -->
                                                     <div class="card-body">
-                                                        <div class="d-flex justify-content-start forSelectLable"
-                                                            for="gender">
+                                                        <div class="d-flex justify-content-start forSelectLable">
                                                             <div>Role {{i + 1}}: </div>
                                                             <button class="btn btn-danger" (click)="removeRole(i)">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -133,8 +132,9 @@
                                                             </button>
                                                         </div>
                                                         <div class="form-group form-floating mb-3">
-                                                            <select class="form-select" formControlName="name">
-                                                                <option [disabled]="(1==1)? true : false" [value]="0">
+                                                            <select class="form-select" formControlName="nameId"
+                                                                [ngClass]="{'is-invalid': rolesArray.controls[i].get('nameId').touched && !rolesArray.controls[i].get('nameId').value}">
+                                                                <option [value]="-1" selected>
                                                                     choose role </option>
                                                                 <option *ngFor="let role of availableRolesName"
                                                                     [value]="role.id">
@@ -142,6 +142,12 @@
                                                                 </option>
                                                             </select>
                                                             <label for="categoryId">Role Name:</label>
+                                                            <ng-container>
+                                                                <div *ngIf="rolesArray.controls[i].get('nameId').touched && !rolesArray.controls[i].get('nameId').value"
+                                                                    class="alert alert-danger">
+                                                                    Please select a role
+                                                                </div>
+                                                            </ng-container>
                                                         </div>
                                                         <div class="form-group form-floating mb-3 card">
                                                             <div class="card-body">
@@ -149,15 +155,17 @@
                                                                     Is Role Managerial:
                                                                 </div>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" formControlName="isManagerial"
+                                                                    <input class="form-check-input" type="radio"
+                                                                        formControlName="isManagerial"
                                                                         id="yesManagerial" [value]="true">
                                                                     <label class="form-check-label" for="yesManagerial">
                                                                         Yes
                                                                     </label>
                                                                 </div>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" formControlName="isManagerial"
-                                                                        id="noManagerial" [value]="false">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        formControlName="isManagerial" id="noManagerial"
+                                                                        [value]="false">
                                                                     <label class="form-check-label" for="noManagerial">
                                                                         No
                                                                     </label>
@@ -166,9 +174,15 @@
                                                         </div>
                                                         <div class="form-group form-floating mb-3">
                                                             <input type="date" class="form-control"
-                                                            formControlName="startRole"
-                                                                [ngClass]="{'is-invalid': employeeForm.get('roles.' + i).touched && employeeForm.get('roles.' + i).errors}" />
+                                                                formControlName="startRole"
+                                                                [ngClass]="{'is-invalid': rolesArray.controls[i].get('startRole').touched && rolesArray.controls[i].get('startRole').errors}" />
                                                             <label for="">Start Role Date</label>
+                                                            <ng-container
+                                                                *ngIf="rolesArray.controls[i].get('startRole').touched && rolesArray.controls[i].get('startRole').errors">
+                                                                <div class="alert alert-danger"
+                                                                    *ngIf="rolesArray.controls[i].get('startRole').errors['required']">
+                                                                    This field is required</div>
+                                                            </ng-container>
                                                         </div>
                                                     </div>
                                                 </div>
