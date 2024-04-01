@@ -19,12 +19,12 @@ namespace API.Core.Entities
 
         public void CopyFields(Role other)
         {
-            this.Name = other.Name;
+            this.NameId = other.NameId;
             this.IsManagerial = other.IsManagerial;
             this.StartRole = other.StartRole;
         }
 
-        public override bool Equals(object? obj)=> obj is Role other && this.Name == other.Name &&
+        public override bool Equals(object? obj)=> obj is Role other && this.NameId == other.NameId &&
                 this.IsManagerial == other.IsManagerial && this.StartRole.Equals(other.StartRole);
 
         public override int GetHashCode() => base.GetHashCode();

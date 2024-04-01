@@ -58,10 +58,17 @@ namespace API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAsync(int id, [FromBody] EmployeePostPutModel employee)
         {
-            var existEmployee = await _service.UpdateEmployeeAsync(id, _mapper.Map<Employee>(employee));
-            if (existEmployee is null)
-                return NotFound();
-            return Ok(_mapper.Map<EmployeeDTO>(existEmployee));
+            try
+            {
+                var existEmployee = await _service.UpdateEmployeeAsync(id, _mapper.Map<Employee>(employee));
+                if (existEmployee is null)
+                    return NotFound();
+                return Ok(_mapper.Map<EmployeeDTO>(existEmployee));
+            }
+            catch (Exception ex)
+            {
+                return Content("Exception" + ex.ToString());
+            }
         }
 
         // DELETE api/<EmployeeController>/5

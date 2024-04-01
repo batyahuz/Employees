@@ -1,5 +1,5 @@
 <p>employee-form works!</p>
-<form id="employeeForm" [formGroup]="employeeForm" (change)="fff()" (ngSubmit)="submit()">
+<form id="employeeForm" [formGroup]="employeeForm" *ngIf="employeeForm" (ngSubmit)="submit()">
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -136,8 +136,9 @@
                                                                 [ngClass]="{'is-invalid': rolesArray.controls[i].get('nameId').touched && !rolesArray.controls[i].get('nameId').value}">
                                                                 <option [value]="-1" selected>
                                                                     choose role </option>
-                                                                <option *ngFor="let role of availableRolesName"
-                                                                    [value]="role.id">
+                                                                <option *ngFor="let role of rolesNames"
+                                                                    [value]="role.id"
+                                                                    [disabled]="!isAvailableRoleName(role.id)">
                                                                     {{ role.name }}
                                                                 </option>
                                                             </select>
