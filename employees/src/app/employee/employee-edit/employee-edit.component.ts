@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { EmployeeService } from '../employee.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-employee-edit',
@@ -13,10 +14,20 @@ export class EmployeeEditComponent {
 
   editEmployee(employeeToUpdate: Employee) {
     this._service.updateEmployeeById(employeeToUpdate).then(() => {
-      //swel success
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Employee Added Successfuly",
+        showConfirmButton: false,
+        timer: 1500
+      })
       this._router.navigate(['/'])
     }).catch(() => {
-      //swel error
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!"
+      })
     })
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { EmployeeService } from '../employee.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-employee-add',
@@ -13,12 +14,20 @@ export class EmployeeAddComponent implements OnInit {
 
   addEmployee(employeeToAdd: Employee) {
     this._service.addEmployee(employeeToAdd).then(() => {
-      //swel success
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Employee Added Successfuly",
+        showConfirmButton: false,
+        timer: 1500
+      })
       this._router.navigate(['/'])
     }).catch((data) => {
-      console.error('error in add..', data);
-
-      //swel error
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!"
+      })
     })
   }
 

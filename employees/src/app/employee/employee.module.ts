@@ -9,7 +9,7 @@ import { EmployeeAddComponent } from './employee-add/employee-add.component';
 import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { InputFieldComponent } from '../../assets/input-field/input-field.component';
+import { MatSliderModule } from '@angular/material/slider';
 // import { MatDialogModule } from '@angular/material/dialog';
 
 
@@ -20,11 +20,11 @@ import { InputFieldComponent } from '../../assets/input-field/input-field.compon
     EmployeeFormComponent,
   ],
   imports: [RouterModule.forChild(routes),
-    InputFieldComponent,
     HttpClientModule,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSliderModule
     /*, MatDialogModule*/
   ],
   providers: [EmployeeService]

@@ -4,6 +4,7 @@ import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '
 import { Role } from '../models/role.model';
 import { EmployeeService } from '../employee.service';
 import { RoleName } from '../models/role.name.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-employee-form',
@@ -109,7 +110,11 @@ export class EmployeeFormComponent implements OnInit {
 
   submit() {
     if (this.isAddRole || !this.isFormValid()) {
-      //swel all fields are required
+      Swal.fire({
+        icon: "error",
+        title: "ERROR",
+        text: "Some fields are required"
+      })
       this.isAddRole = false;
       return;
     }
