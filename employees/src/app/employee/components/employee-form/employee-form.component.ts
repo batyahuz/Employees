@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Employee } from '../models/employee.model';
+import { Employee } from '../../models/employee.model';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Role } from '../models/role.model';
-import { EmployeeService } from '../employee.service';
-import { RoleName } from '../models/role.name.model';
+import { Role } from '../../models/role.model';
+import { EmployeeService } from '../../employee.service';
+import { RoleName } from '../../models/role.name.model';
 import Swal from 'sweetalert2';
 
 @Component({

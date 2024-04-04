@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
-import { Employee } from '../models/employee.model';
-import { EmployeeService } from '../employee.service';
+import { Employee } from '../../models/employee.model';
+import { EmployeeService } from '../../employee.service';
 
 @Component({
   selector: 'app-employee-search',
@@ -14,7 +14,10 @@ export class EmployeeSearchComponent implements OnInit {
 
   searchTerms = new Subject<string>();
 
-  clearSearch(value: HTMLInputElement): void { value.value = ''; }
+  clearSearch(value: HTMLInputElement): void {
+    this.searchTerms.next('')
+    value.value = ''
+  }
 
   search(value: HTMLInputElement): void { this.searchTerms.next(value.value) }
 

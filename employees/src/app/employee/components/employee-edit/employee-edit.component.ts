@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Employee } from '../models/employee.model';
-import { EmployeeService } from '../employee.service';
+import { Employee } from '../../models/employee.model';
+import { EmployeeService } from '../../employee.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
