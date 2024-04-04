@@ -10,6 +10,8 @@ import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSliderModule } from '@angular/material/slider';
+import { EmployeeMainComponent } from './employee-main/employee-main.component';
+import { ExportEmployeeToExcelComponent } from './export-employee-to-excel/export-employee-to-excel.component';
 // import { MatDialogModule } from '@angular/material/dialog';
 
 
@@ -18,6 +20,8 @@ import { MatSliderModule } from '@angular/material/slider';
     EmployeeAddComponent,
     EmployeeEditComponent,
     EmployeeFormComponent,
+    EmployeeMainComponent,
+    ExportEmployeeToExcelComponent
   ],
   imports: [RouterModule.forChild(routes),
     HttpClientModule,

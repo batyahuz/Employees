@@ -12,8 +12,12 @@ export class EmployeeService {
   private readonly api = "api/";
   private readonly apiEmp = this.api + "Employee";
 
-  getEmployees(status: boolean | null = null): Observable<Employee[]> {
-    return this._http.get<Employee[]>(this.apiEmp + '?status=' + (status || ''))
+  getEmployees(options: { status?: boolean | null, query?: string | null }): Observable<Employee[]> {
+    const { status, query } = options;
+    let url = this.apiEmp + '?';
+    if (status !== undefined && status !== null) { url += 'status=' + status + '&'; }
+    if (query !== undefined && query !== null) { url += 'query=' + query; }
+    return this._http.get<Employee[]>(url);
   }
 
   getEmployeeById(id: number, status: boolean | null = null): Observable<any> {
