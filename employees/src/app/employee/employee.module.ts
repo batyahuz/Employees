@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { routes } from './employee.routes';
 import { EmplyeesTableComponent } from './emplyees-table/emplyees-table.component';
 import { EmployeeService } from './employee.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { EmployeeAddComponent } from './employee-add/employee-add.component';
 import { EmployeeEditComponent } from './employee-edit/employee-edit.component';

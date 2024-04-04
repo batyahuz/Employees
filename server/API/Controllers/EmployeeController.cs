@@ -1,6 +1,7 @@
 ﻿using API.Core.Entities;
 using API.Core.Service;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Solid.API.Models;
 using Solid.Core.DTOs;
@@ -11,6 +12,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class EmployeeController(IEmployeeService service, IMapper mapper) : ControllerBase
     {
         private readonly IEmployeeService _service = service;

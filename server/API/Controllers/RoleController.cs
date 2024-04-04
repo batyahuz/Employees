@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Solid.Core.Entities;
 using Solid.Core.Services;
 
@@ -8,6 +9,7 @@ namespace Solid.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class RoleController(IRoleService service) : ControllerBase
     {
         private readonly IRoleService _service = service;

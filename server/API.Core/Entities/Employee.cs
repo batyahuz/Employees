@@ -42,23 +42,6 @@ namespace API.Core.Entities
             Status = true;
         }
 
-        public override bool Equals(object? obj)
-        {
-            if (obj is not Employee)
-                return false;
-            var emp = (Employee)obj;
-            return emp != null &&
-                FirstName.Equals(emp.FirstName) &&
-                LastName.Equals(emp.LastName) &&
-                (IdentityNumber is null || IdentityNumber.Equals(emp.IdentityNumber)) &&
-                Gender.Equals(emp.Gender) &&
-                BirthDate.Equals(emp.BirthDate) &&
-                Status.Equals(emp.Status) &&
-                StartWorking.Equals(emp.StartWorking) &&
-                Roles.SequenceEqual(emp.Roles) &&
-                (Team is null || Team.Equals(Team));
-        }
-
         public void CopyFields(Employee other)
         {
             if (other is not null)
@@ -91,6 +74,28 @@ namespace API.Core.Entities
                     role.CopyFields(r);
                     this.Roles.Add(role);
                 }
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is not Employee)
+                return false;
+            var emp = (Employee)obj;
+            return emp != null &&
+                FirstName.Equals(emp.FirstName) &&
+                LastName.Equals(emp.LastName) &&
+                (IdentityNumber is null || IdentityNumber.Equals(emp.IdentityNumber)) &&
+                Gender.Equals(emp.Gender) &&
+                BirthDate.Equals(emp.BirthDate) &&
+                Status.Equals(emp.Status) &&
+                StartWorking.Equals(emp.StartWorking) &&
+                Roles.SequenceEqual(emp.Roles) &&
+                (Team is null || Team.Equals(Team));
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }
