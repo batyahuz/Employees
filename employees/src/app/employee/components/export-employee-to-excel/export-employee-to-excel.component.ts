@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Employee, GENDER } from '../models/employee.model';
+import { Employee, GENDER } from '../../models/employee.model';
 import * as XLSX from 'xlsx';
 
 @Component({

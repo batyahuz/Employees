@@ -11,7 +11,7 @@ import { EmployeeFormComponent } from './components/employee-form/employee-form.
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSliderModule } from '@angular/material/slider';
 import { EmployeeMainComponent } from './components/employee-main/employee-main.component';
-import { ExportEmployeeToExcelComponent } from './export-employee-to-excel/export-employee-to-excel.component';
+import { ExportEmployeeToExcelComponent } from './components/export-employee-to-excel/export-employee-to-excel.component';
 import { EmployeeSearchComponent } from './components/employee-search/employee-search.component';
 // import { MatDialogModule } from '@angular/material/dialog';
 
