@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using API.Core.Entities;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Solid.API.Models;
 using Solid.Core.Entities;
 using Solid.Core.Services;
 using System.IdentityModel.Tokens.Jwt;
@@ -12,14 +15,16 @@ namespace Solid.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController(IConfiguration configuration, ITeamService service) : ControllerBase
+    public class AuthController(IConfiguration configuration, ITeamService service, IMapper mapper) : ControllerBase
     {
         private readonly IConfiguration _configuration = configuration;
         private readonly ITeamService _service = service;
+        private readonly IMapper _mapper = mapper;
 
         [HttpPost]
-        public async Task<IActionResult> LoginAsync([FromBody] Team team)
+        public async Task<IActionResult> LoginAsync([FromBody] LoginModel loginModel)
         {
+            var team  = _mapper.Map<Team>(loginModel);
             var ExistsTeam = await _service.GetTeamByNamePasswordAsync(team);
             if (ExistsTeam is null)
                 return Unauthorized();
