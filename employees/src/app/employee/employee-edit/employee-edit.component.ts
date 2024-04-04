@@ -17,7 +17,7 @@ export class EmployeeEditComponent {
       Swal.fire({
         position: "top-end",
         icon: "success",
-        title: "Employee Added Successfuly",
+        title: "Employee Edited Successfully",
         showConfirmButton: false,
         timer: 1500
       })

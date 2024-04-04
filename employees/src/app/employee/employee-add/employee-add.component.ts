@@ -17,7 +17,7 @@ export class EmployeeAddComponent implements OnInit {
       Swal.fire({
         position: "top-end",
         icon: "success",
-        title: "Employee Added Successfuly",
+        title: "Employee Added Successfully",
         showConfirmButton: false,
         timer: 1500
       })

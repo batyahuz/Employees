@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee, GENDER } from '../models/employee.model';
+import { Employee } from '../models/employee.model';
 import { EmployeeService } from '../employee.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { EmployeeEditComponent } from '../employee-edit/employee-edit.component';
 import { EmployeeAddComponent } from '../employee-add/employee-add.component';
-import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-employee-main',
@@ -14,7 +13,6 @@ import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 })
 export class EmployeeMainComponent implements OnInit {
   employees: Employee[];
-  searchTerms = new Subject<string>();
 
   getEmployees(): void {
     this._service.getEmployees({ status: true }).subscribe(e => this.employees = e)
@@ -57,19 +55,13 @@ export class EmployeeMainComponent implements OnInit {
     this._service.deleteEmployeeById(id).then(() => this.getEmployees())
   }
 
-  search(value: string) {
-    this.searchTerms.next(value)
+  filterEmployees(value: Employee[]): void {
+    this.employees = value;
   }
 
   constructor(private _service: EmployeeService, private _router: Router, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getEmployees()
-
-    this.searchTerms.pipe(
-      debounceTime(1000),
-      distinctUntilChanged(),
-      switchMap((res) => this._service.getEmployees({ query: res }))
-    ).subscribe((res) => this.employees = res)
   }
 }

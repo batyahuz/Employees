@@ -1,9 +1,10 @@
 <app-export-employee-to-excel [employees]="employees"></app-export-employee-to-excel>
 
-<div class="border border-info rounded p-3 mt-2">
-    <app-emplyees-table [employees]="employees" (add)="addEmployee()" (delete)="deleteEmployee($event)"
-        (edit)="openEditEmployeeDialog($event)"></app-emplyees-table>
-</div>
+<app-employee-search (filterEmployees)="filterEmployees($event)"></app-employee-search>
+
+
+<app-emplyees-table [employees]="employees" (add)="addEmployee()" (delete)="deleteEmployee($event)"
+    (edit)="openEditEmployeeDialog($event)"></app-emplyees-table>
 <!-- <mat-slider min="1" max="100" step="1" value="1"></mat-slider> -->
 <!-- <app-employee-add class="mat-typography"></app-employee-add> -->
 <!-- <router-outlet name="modal"></router-outlet> -->
