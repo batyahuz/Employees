@@ -1,4 +1,3 @@
-<p>employee-form works!</p>
 <form id="employeeForm" [formGroup]="employeeForm" *ngIf="employeeForm" (ngSubmit)="submit()">
     <div class="container mt-5">
         <div class="row justify-content-center">
@@ -101,7 +100,7 @@
                                 <div class="card forInnerCard">
                                     <div class="card-body">
                                         <h6 class="card-title text-center turquoise">Roles</h6>
-                                        <button class="btn btn-outline-success mb-2" (click)="addRole()">
+                                        <button type="button" id="addRole" class="btn btn-outline-success mb-2" (click)="addRole()">
                                             <i class="bi bi-file-earmark-plus-fill">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-file-earmark-plus-fill"
@@ -114,11 +113,13 @@
                                         <div formArrayName="roles">
                                             <div *ngFor="let item of rolesArray?.controls; let i = index" class="mb-3"
                                                 [formGroupName]="i">
-                                                <div class="form-group form-floating mb-3 card blue-card" style="width: 100%;">
+                                                <div class="form-group form-floating mb-3 card blue-card"
+                                                    style="width: 100%;">
                                                     <div class="card-body">
                                                         <div class="d-flex justify-content-between forSelectLable">
                                                             <div>Role {{i + 1}}: </div>
-                                                            <button class="btn btn-outline-danger" (click)="removeRole(i)">
+                                                            <button class="btn btn-outline-danger"
+                                                                (click)="removeRole(i)">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" fill="currentColor" class="bi bi-trash"
                                                                     viewBox="0 0 16 16">
@@ -153,20 +154,14 @@
                                                                 <div id="isManagerial" class="forSelectLable">
                                                                     Is Role Managerial:
                                                                 </div>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        formControlName="isManagerial"
-                                                                        id="yesManagerial" [value]="true">
-                                                                    <label class="form-check-label" for="yesManagerial">
-                                                                        Yes
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        formControlName="isManagerial" id="noManagerial"
-                                                                        [value]="false">
-                                                                    <label class="form-check-label" for="noManagerial">
-                                                                        No
+                                                                <div class="form-check form-switch">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        formControlName="isManagerial" role="switch"
+                                                                        id="flexSwitchCheckChecked">
+                                                                    <label class="form-check-label"
+                                                                        for="flexSwitchCheckChecked">
+                                                                        {{rolesArray.controls[i].get('isManagerial').value
+                                                                        == true?'Yes':'No'}}
                                                                     </label>
                                                                 </div>
                                                             </div>

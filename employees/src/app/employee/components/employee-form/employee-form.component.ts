@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Employee } from '../../models/employee.model';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Role } from '../../models/role.model';
 import { EmployeeService } from '../../employee.service';
 import { RoleName } from '../../models/role.name.model';
@@ -9,18 +9,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-employee-form',
   templateUrl: './employee-form.component.html',
-  styleUrl: './employee-form.component.css'//,
-  // animations: [
-  //   trigger('slideInOut', [
-  //     transition(':enter', [
-  //       style({ transform: 'translateY(-100%)' }),
-  //       animate('400ms ease-in', style({ transform: 'translateY(0%)' }))
-  //     ]),
-  //     transition(':leave', [
-  //       animate('400ms ease-in', style({ transform: 'translateY(-100%)' }))
-  //     ])
-  //   ])
-  // ]
+  styleUrl: './employee-form.component.css'
 })
 export class EmployeeFormComponent implements OnInit {
 
@@ -31,6 +20,8 @@ export class EmployeeFormComponent implements OnInit {
   submitMessage: string;
 
   employeeForm: FormGroup;
+
+  rolesNames: RoleName[];
 
   private _employee: Employee;
   public get employee(): Employee { return this._employee; }
@@ -55,8 +46,6 @@ export class EmployeeFormComponent implements OnInit {
     return this.employeeForm.get('roles') as FormArray;
   }
 
-  rolesNames: RoleName[];
-
   isAvailableRoleName(id: number): boolean {
     for (let index = 0; index < this.rolesArray.value.length; index++) {
       if (this.rolesArray.value[index].nameId == id)
@@ -74,54 +63,26 @@ export class EmployeeFormComponent implements OnInit {
     });
   }
 
-  isArrayHasValues(array: unknown[]): boolean {
-    return Object.values(array).every((val, i) => i === 0 || (val !== null && val !== ''))
-  }
-
-  isArrayAllEmpty(array: unknown[]): boolean {
-    return Object.values(array).every((val, i) => i === 0 || val === null || val === '')
-
-  }
-
-  requireAllFieldsOrNone(group: AbstractControl): boolean {
-    return Object.values(group.value).every(array =>
-      this.isArrayHasValues(Object.values(array)) || this.isArrayAllEmpty(Object.values(array)))
-  }
-
   isFormValid(): boolean {
-    if (this.employeeForm.invalid) {
-      const invalidFields = Object.keys(this.employeeForm.controls).filter(controlName => this.employeeForm.get(controlName).invalid)
-      if (invalidFields.length > 1 || invalidFields[0] !== 'roles' || !this.requireAllFieldsOrNone(this.rolesArray))
-        return false
-    }
-    return true;
+    return this.employeeForm.valid
   }
 
-  isAddRole: boolean = false;
-
-  addRole() {
-    this.isAddRole = true;
+  addRole(): void {
     this.rolesArray.push(this.createRoleFormGroup(new Role()));
   }
 
-  removeRole(index: number) {
+  removeRole(index: number): void {
     this.rolesArray.removeAt(index);
   }
 
-  submit() {
-    if (this.isAddRole || !this.isFormValid()) {
+  submit(): void {
+    if (this.employeeForm.invalid) {
       Swal.fire({
         icon: "error",
         title: "ERROR",
         text: "Some fields are required"
-      })
-      this.isAddRole = false;
+      });
       return;
-    }
-
-    for (let index = this.rolesArray.length - 1; index >= 0; index--) {
-      if (this.isArrayAllEmpty(this.employeeForm.value.roles[index]))
-        this.employeeForm.value.roles.pop()
     }
 
     if (this.rolesArray.value?.length === 0) {
@@ -129,7 +90,6 @@ export class EmployeeFormComponent implements OnInit {
     }
 
     this.onSubmit.emit(this.employeeForm.value);
-
   }
 
   constructor(private formBuilder: FormBuilder, private _service: EmployeeService) { }

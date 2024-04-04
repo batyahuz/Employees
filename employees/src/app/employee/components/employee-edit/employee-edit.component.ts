@@ -22,12 +22,13 @@ export class EmployeeEditComponent {
         timer: 1500
       })
       this._router.navigate(['/'])
-    }).catch(() => {
+    }).catch((data) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Something went wrong!"
+        text: data ? data.error.text : "Something went wrong!"
       })
+
     })
   }
 
