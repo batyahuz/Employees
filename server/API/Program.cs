@@ -32,8 +32,8 @@ builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    Console.WriteLine(options.Schemes);
-    Console.WriteLine(options.ToString());
+    Console.WriteLine("cw 1!!!!!!!!!!!!"+options.Schemes);
+    Console.WriteLine("cw 2!!!!!!!!!!!!"+options.ToString());
 })
     .AddJwtBearer(options =>
     {

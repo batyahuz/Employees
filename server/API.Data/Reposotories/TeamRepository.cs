@@ -1,4 +1,5 @@
 ﻿using API.Data;
+using Microsoft.EntityFrameworkCore;
 using Solid.Core.Entities;
 using Solid.Core.Repositories;
 using System;
@@ -15,7 +16,9 @@ namespace Solid.Data.Reposotories
 
         public async Task<Team?> GetTeamByNamePasswordAsync(Team team)
         {
-            return await _context.Teams.FindAsync(team);
+
+            return await _context.Teams
+                .FirstOrDefaultAsync(t => t.Name == team.Name && t.Password == team.Password);
         }
     }
 }
