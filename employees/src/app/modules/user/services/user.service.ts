@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { SessionStorageService } from '../../../services/session-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +21,9 @@ export class UserService {
   }
 
   private setSessionStorage(token: string, name: string) {
-    sessionStorage.setItem('Authorization', token)
-    sessionStorage.setItem('userName', name)
+    this._service.setItem('Authorization', token)
+    this._service.setItem('userName', name)
   }
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient, private _service: SessionStorageService) { }
 }
