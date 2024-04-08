@@ -5,7 +5,7 @@
 namespace Solid.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class changefromstringtorolename : Migration
+    public partial class ChangeFromStringToRoleName : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

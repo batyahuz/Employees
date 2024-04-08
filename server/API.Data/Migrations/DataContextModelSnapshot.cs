@@ -53,7 +53,7 @@ namespace Solid.Data.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("TeamId")
+                    b.Property<int>("TeamId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -134,7 +134,9 @@ namespace Solid.Data.Migrations
                 {
                     b.HasOne("Solid.Core.Entities.Team", "Team")
                         .WithMany("Employees")
-                        .HasForeignKey("TeamId");
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Team");
                 });

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Solid.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240331193924_change from string to rolename")]
-    partial class ChangeFromStringToRoleName
+    [Migration("20240404150904_ad field TeamId to Employee")]
+    partial class adfieldTeamIdtoEmployee
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,7 @@ namespace Solid.Data.Migrations
                         .HasColumnType("date");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Gender")
@@ -46,6 +47,7 @@ namespace Solid.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateOnly>("StartWorking")
@@ -54,7 +56,7 @@ namespace Solid.Data.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("TeamId")
+                    b.Property<int>("TeamId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -78,7 +80,7 @@ namespace Solid.Data.Migrations
                     b.Property<bool>("IsManagerial")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("NameId")
+                    b.Property<int>("NameId")
                         .HasColumnType("int");
 
                     b.Property<DateOnly>("StartRole")
@@ -102,6 +104,7 @@ namespace Solid.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -118,6 +121,11 @@ namespace Solid.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -129,7 +137,9 @@ namespace Solid.Data.Migrations
                 {
                     b.HasOne("Solid.Core.Entities.Team", "Team")
                         .WithMany("Employees")
-                        .HasForeignKey("TeamId");
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Team");
                 });
@@ -142,7 +152,9 @@ namespace Solid.Data.Migrations
 
                     b.HasOne("Solid.Core.Entities.RoleName", "Name")
                         .WithMany()
-                        .HasForeignKey("NameId");
+                        .HasForeignKey("NameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Name");
                 });

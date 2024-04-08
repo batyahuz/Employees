@@ -16,7 +16,6 @@ namespace Solid.Data.Reposotories
 
         public async Task<Team?> GetTeamByNamePasswordAsync(Team team)
         {
-
             return await _context.Teams
                 .FirstOrDefaultAsync(t => t.Name == team.Name && t.Password == team.Password);
         }

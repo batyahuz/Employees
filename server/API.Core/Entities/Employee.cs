@@ -1,12 +1,5 @@
 ﻿using Solid.Core.Entities;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace API.Core.Entities
 {
@@ -35,6 +28,7 @@ namespace API.Core.Entities
         public bool Status { get; set; }
         public DateOnly StartWorking { get; set; }
         public List<Role> Roles { get; set; } = [];
+        public int TeamId { get; set; }
         public Team? Team { get; set; }
 
         public Employee()
@@ -74,6 +68,14 @@ namespace API.Core.Entities
                     role.CopyFields(r);
                     this.Roles.Add(role);
                 }
+        }
+
+        public bool Conteins(string query)
+        {
+            return FirstName.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                LastName.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                (IdentityNumber is not null &&
+                IdentityNumber.Equals(query, StringComparison.OrdinalIgnoreCase));
         }
 
         public override bool Equals(object? obj)
