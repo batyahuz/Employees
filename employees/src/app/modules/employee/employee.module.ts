@@ -13,6 +13,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { EmployeeMainComponent } from './components/employee-main/employee-main.component';
 import { ExportEmployeeToExcelComponent } from './components/export-employee-to-excel/export-employee-to-excel.component';
 import { EmployeeSearchComponent } from './components/employee-search/employee-search.component';
+import { HeaderInterceptor } from './interceptors/header.interceptor';
 
 @NgModule({
   declarations: [EmplyeesTableComponent,

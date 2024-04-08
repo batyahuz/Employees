@@ -57,7 +57,7 @@
             </tr>
         </tbody>
     </table>
-    <div class="text-center" *ngIf="employees.length == 0">
+    <div class="text-center" *ngIf="employees == null || employees.length == 0">
         <span class="me-2"> No Employees Yet</span>
         <button class="btn btn-outline-primary" (click)="addEmployee()">
             <i class="bi bi-pencil-fill">
