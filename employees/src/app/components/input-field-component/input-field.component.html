@@ -1,0 +1,24 @@
+<div class="form-group form-floating mb-3">
+
+    <input [ngClass]="{'is-invalid': forControl?.touched && forControl?.errors}" class="form-control" [id]="idName"
+        [name]="idName" [type]="typeString" [formControl]="forControl">
+
+    <label [for]="idName">
+        {{ label }}
+    </label>
+
+    <ng-container *ngIf="forControl?.touched && forControl?.errors">
+        <div class="alert alert-danger" *ngIf="forControl.errors['required']">
+            This field is required
+        </div>
+        <div class="alert alert-danger" *ngIf="forControl.errors['incorrect']">
+            This field is in correct
+        </div>
+        <div class="alert alert-danger" *ngIf="forControl.errors['minlength']">
+            Required min length: {{forControl.errors['minlength'].requiredLength}}
+        </div>
+        <div class="alert alert-danger" *ngIf="forControl.errors['maxlength']">
+            Required max length: {{forControl.errors['maxlength'].requiredLength}}
+        </div>
+    </ng-container>
+</div>

@@ -22,7 +22,7 @@ export class EmployeeAddComponent implements OnInit {
         timer: 1500
       })
       this._router.navigate(['/'])
-    }).catch((data) => {
+    }).catch(() => {
       Swal.fire({
         icon: "error",
         title: "Oops...",

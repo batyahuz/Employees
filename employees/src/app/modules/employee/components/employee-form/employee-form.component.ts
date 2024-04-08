@@ -34,7 +34,7 @@ export class EmployeeFormComponent implements OnInit {
         id: [this.employee.id || 0],
         firstName: [this.employee.firstName, [Validators.required]],
         lastName: [this.employee.lastName, [Validators.required]],
-        identityNumber: [this.employee.identityNumber, [Validators.required, Validators.pattern("\\d{8,9}")]],
+        identityNumber: [this.employee.identityNumber, [Validators.required, Validators.minLength(8), Validators.maxLength(9)]],
         gender: [this.employee.gender, [Validators.required]],
         birthDate: [this.employee.birthDate, [Validators.required]],
         startWorking: [this.employee.startWorking, [Validators.required]],

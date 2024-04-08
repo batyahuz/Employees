@@ -9,37 +9,37 @@ import { RoleName } from '../models/role.name.model';
 })
 export class EmployeeService {
 
-  private readonly apiEmp = 'api/Employee';
+  private readonly route = 'api/Employee';
 
   getEmployees(options: { status?: boolean | null, query?: string | null }): Observable<Employee[]> {
     const { status, query } = options;
-    let url = this.apiEmp + '?';
+    let url = this.route + '?';
     if (status !== undefined && status !== null) { url += 'status=' + status + '&'; }
     if (query !== undefined && query !== null) { url += 'query=' + query; }
     return this._http.get<Employee[]>(url);
   }
 
   getEmployeeById(id: number, status: boolean | null = null): Observable<any> {
-    return this._http.get(this.apiEmp + '/' + id + (status ? '?status=' + status : ''))
+    return this._http.get(this.route + '/' + id + (status ? '?status=' + status : ''))
   }
 
   addEmployee(emp: Employee): Promise<any> {
     return new Promise((res, rej) => {
-      this._http.post<Employee>(this.apiEmp, emp)
+      this._http.post<Employee>(this.route, emp)
         .subscribe({ next: (data) => res(data), error: (error) => rej(error) })
     })
   }
 
   updateEmployeeById(emp: Employee): Promise<any> {
     return new Promise((res, rej) => {
-      this._http.put<Employee>(this.apiEmp + '/' + emp.id, emp)
+      this._http.put<Employee>(this.route + '/' + emp.id, emp)
         .subscribe({ next: (data) => res(data), error: (error) => rej(error) })
     })
   }
 
   deleteEmployeeById(id: number): Promise<any> {
     return new Promise((res, rej) => {
-      this._http.delete(this.apiEmp + '/' + id)
+      this._http.delete(this.route + '/' + id)
         .subscribe({ next: (data) => res(data), error: (error) => rej(error) })
     })
   }
