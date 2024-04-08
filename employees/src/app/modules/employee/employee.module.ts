@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { routes } from './employee.routes';
 import { EmplyeesTableComponent } from './components/emplyees-table/emplyees-table.component';
-import { EmployeeService } from './employee.service';
+import { EmployeeService } from './services/employee.service';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { EmployeeAddComponent } from './components/employee-add/employee-add.component';

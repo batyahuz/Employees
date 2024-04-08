@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { Employee } from '../../models/employee.model';
-import { EmployeeService } from '../../employee.service';
+import { EmployeeService } from '../../services/employee.service';
 
 @Component({
   selector: 'app-employee-search',
