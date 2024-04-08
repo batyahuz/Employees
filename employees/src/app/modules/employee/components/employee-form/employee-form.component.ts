@@ -51,7 +51,7 @@ export class EmployeeFormComponent implements OnInit {
     return this.employeeForm.get(propertyName) as FormControl;
   }
 
-  getRoleController(i: number, propertyName: string): FormControl {
+  getRoleController(i:number,propertyName: string):FormControl{
     return this.rolesArray.controls[i].get(propertyName) as FormControl;
   }
 
