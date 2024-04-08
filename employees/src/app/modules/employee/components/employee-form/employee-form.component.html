@@ -7,60 +7,26 @@
                         <h5 class="card-title text-center turquoise">{{submitMessage}} Employee</h5>
                         <ng-container class="card" *ngIf="employee">
                             <div class="card-body">
-                                <!-- firstName -->
-                                <div class="form-group form-floating mb-3">
-                                    <input class="form-control"
-                                        [ngClass]="{'is-invalid': employeeForm.controls['firstName'].touched && employeeForm.controls['firstName'].errors}"
-                                        type="text" id="firstName" formControlName="firstName" name="firstName" />
-                                    <label for="firstName">First-Name:</label>
-                                    <ng-container
-                                        *ngIf="employeeForm.controls['firstName'].touched && employeeForm.controls['firstName'].errors">
-                                        <div class="alert alert-danger"
-                                            *ngIf="employeeForm.controls['firstName'].errors['required']">
-                                            This field is required</div>
-                                    </ng-container>
-                                </div>
-                                <!-- lastName -->
-                                <div class="form-group form-floating mb-3">
-                                    <input class="form-control"
-                                        [ngClass]="{'is-invalid': employeeForm.controls['lastName'].touched && employeeForm.controls['lastName'].errors}"
-                                        type="text" id="lastName" formControlName="lastName" name="lastName" />
-                                    <label for="lastName">Last-Name:</label>
-                                    <ng-container
-                                        *ngIf="employeeForm.controls['lastName'].touched && employeeForm.controls['lastName'].errors">
-                                        <div class="alert alert-danger"
-                                            *ngIf="employeeForm.controls['lastName'].errors['required']">
-                                            This field is required</div>
-                                    </ng-container>
-                                </div>
-                                <!-- identityNumber -->
-                                <div class="form-group form-floating mb-3">
-                                    <input class="form-control"
-                                        [ngClass]="{'is-invalid': employeeForm.controls['identityNumber'].touched && employeeForm.controls['identityNumber'].errors}"
-                                        type="text" id="identityNumber" formControlName="identityNumber"
-                                        name="identityNumber" />
-                                    <label for="identityNumber">Identity-Number:</label>
-                                    <ng-container
-                                        *ngIf="employeeForm.controls['identityNumber'].touched && employeeForm.controls['identityNumber'].errors">
-                                        <div class="alert alert-danger"
-                                            *ngIf="employeeForm.controls['identityNumber'].errors['required']">
-                                            This field is required</div>
-                                        <div class="alert alert-danger"
-                                            *ngIf="employeeForm.controls['identityNumber'].errors['pattern']">
-                                            This field's length must be 8-9 digits</div>
-                                    </ng-container>
-                                </div>
-                                <!-- gender -->
+
+                                <app-input-field [forControl]="getFormControl('firstName')" label="First-Name"
+                                    idName="firstName" />
+
+                                <app-input-field [forControl]="getFormControl('lastName')" label="Last-Name"
+                                    idName="lastName" />
+
+                                <app-input-field [forControl]="getFormControl('identityNumber')" label="Identity-Number"
+                                    idName="identityNumber" />
+
                                 <div class="card forInnerCard">
                                     <div class="card-body">
                                         <div class="form-group form-floating mb-3">
-                                            <div id="gender" class="forSelectLable" for="gender">Select Gender:
-                                            </div>
+                                            <div id="gender" class="forSelectLable" for="gender">Select Gender:</div>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="gender" id="male"
                                                     [value]="0" formControlName="gender">
                                                 <label class="form-check-label" for="male"> 🧑 male </label>
                                             </div>
+
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="gender" id="female"
                                                     [value]="1" formControlName="gender">
@@ -69,38 +35,19 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- birthDate -->
-                                <div class="form-group form-floating mb-3">
-                                    <input class="form-control"
-                                        [ngClass]="{'is-invalid': employeeForm.controls['birthDate'].touched && employeeForm.controls['birthDate'].errors}"
-                                        type="date" id="birthDate" formControlName="birthDate" name="birthDate" />
-                                    <label for="birthDate">Birth-Date:</label>
-                                    <ng-container
-                                        *ngIf="employeeForm.controls['birthDate'].touched && employeeForm.controls['birthDate'].errors">
-                                        <div class="alert alert-danger"
-                                            *ngIf="employeeForm.controls['birthDate'].errors['required']">
-                                            This field is required</div>
-                                    </ng-container>
-                                </div>
-                                <!-- startWorking -->
-                                <div class="form-group form-floating mb-3">
-                                    <input class="form-control"
-                                        [ngClass]="{'is-invalid': employeeForm.controls['startWorking'].touched && employeeForm.controls['startWorking'].errors}"
-                                        type="date" id="startWorking" formControlName="startWorking"
-                                        name="startWorking" />
-                                    <label for="startWorking">Start-Working-Date:</label>
-                                    <ng-container
-                                        *ngIf="employeeForm.controls['startWorking'].touched && employeeForm.controls['startWorking'].errors">
-                                        <div class="alert alert-danger"
-                                            *ngIf="employeeForm.controls['startWorking'].errors['required']">
-                                            This field is required</div>
-                                    </ng-container>
-                                </div>
+
+                                <app-input-field [forControl]="getFormControl('birthDate')" label="Birth-Date"
+                                    idName="birthDate" typeString="date" />
+
+                                <app-input-field [forControl]="getFormControl('startWorking')"
+                                    label="Start-Working-Date" idName="startWorking" typeString="date" />
+
                                 <!-- roles -->
                                 <div class="card forInnerCard">
                                     <div class="card-body">
                                         <h6 class="card-title text-center turquoise">Roles</h6>
-                                        <button type="button" id="addRole" class="btn btn-outline-success mb-2" (click)="addRole()">
+                                        <button type="button" id="addRole" class="btn btn-outline-success mb-2"
+                                            (click)="addRole()">
                                             <i class="bi bi-file-earmark-plus-fill">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-file-earmark-plus-fill"
@@ -166,18 +113,10 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group form-floating mb-3">
-                                                            <input type="date" class="form-control"
-                                                                formControlName="startRole"
-                                                                [ngClass]="{'is-invalid': rolesArray.controls[i].get('startRole').touched && rolesArray.controls[i].get('startRole').errors}" />
-                                                            <label for="">Start Role Date</label>
-                                                            <ng-container
-                                                                *ngIf="rolesArray.controls[i].get('startRole').touched && rolesArray.controls[i].get('startRole').errors">
-                                                                <div class="alert alert-danger"
-                                                                    *ngIf="rolesArray.controls[i].get('startRole').errors['required']">
-                                                                    This field is required</div>
-                                                            </ng-container>
-                                                        </div>
+
+                                                        <app-input-field [forControl]="getRoleController(i,'startRole')"
+                                                            label="Start Role Date" idName="startRole"
+                                                            typeString="date" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -196,71 +135,3 @@
             </div>
         </div>
     </div>
-</form>
-<!--  <app-input-field
-                                    [label]="'First-Name:'"
-                                    [placeholder]="'Enter first name'"
-                                    [form]="employeeForm"
-                                    [controlName]="'firstName'"
-                                    >
-                                </app-input-field>
-                                
-                                <app-input-field
-                                    [label]="'Last-Name:'"
-                                    [placeholder]="'Enter last name'"
-                                    [form]="employeeForm"
-                                    [controlName]="'lastName'"
-                                    >
-                                </app-input-field>
-                                
-                                <app-input-field
-                                    [label]="'Identity-Number:'"
-                                    [placeholder]="'Enter identity number'"
-                                    [form]="employeeForm"
-                                    [controlName]="'identityNumber'"
-                                    [validationErrors]="{
-                                        'pattern': 'This field\'s length must be 8-9 digits'
-                                    }">
-                                </app-input-field>
-
-                                <app-input-field
-                                    [label]="'Select Gender:'"
-                                    [typeString]="'radio'"
-                                    [placeholder]="'Select gender'"
-                                    [form]="employeeForm"
-                                    [controlName]="'gender'"
-                                    [validationErrors]="{}">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender" id="male"
-                                            [value]="0" formControlName="gender">
-                                        <label class="form-check-label" for="male"> 🧑 male </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender" id="female"
-                                            [value]="1" formControlName="gender">
-                                        <label class="form-check-label" for="female"> 👩 female </label>
-                                    </div>
-                                </app-input-field>
-                                
-                                <app-input-field
-                                    [label]="'Birth-Date:'"
-                                    [typeString]="'date'"
-                                    [placeholder]="'Enter birth date'"
-                                    [form]="employeeForm"
-                                    [controlName]="'birthDate'"
-                                    [validationErrors]="{
-                                        'required': 'This field is required'
-                                    }">
-                                </app-input-field>
-                                
-                                <app-input-field
-                                    [label]="'Start-Working-Date:'"
-                                    [typeString]="'date'"
-                                    [placeholder]="'Enter start working date'"
-                                    [form]="employeeForm"
-                                    [controlName]="'startWorking'"
-                                    [validationErrors]="{
-                                        'required': 'This field is required'
-                                    }">
-                                </app-input-field>
- -->

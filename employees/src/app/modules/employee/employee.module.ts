@@ -15,6 +15,7 @@ import { ExportEmployeeToExcelComponent } from './components/export-employee-to-
 import { EmployeeSearchComponent } from './components/employee-search/employee-search.component';
 import { HeaderInterceptor } from './interceptors/header.interceptor';
 import { RoleService } from './services/role.service';
+import { InputFieldComponent } from '../../components/input-field-component/input-field.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { RoleService } from './services/role.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSliderModule
+    MatSliderModule,
+    InputFieldComponent
     /*, MatDialogModule*/
   ],
   providers: [

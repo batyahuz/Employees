@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Employee } from '../../models/employee.model';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Role } from '../../models/role.model';
 import { EmployeeService } from '../../services/employee.service';
 import { RoleName } from '../../models/role.name.model';
@@ -45,6 +45,14 @@ export class EmployeeFormComponent implements OnInit {
 
   get rolesArray(): FormArray {
     return this.employeeForm.get('roles') as FormArray;
+  }
+
+  getFormControl(propertyName: string): FormControl {
+    return this.employeeForm.get(propertyName) as FormControl;
+  }
+
+  getRoleController(i: number, propertyName: string): FormControl {
+    return this.rolesArray.controls[i].get(propertyName) as FormControl;
   }
 
   isAvailableRoleName(id: number): boolean {
