@@ -15,19 +15,11 @@ export class EmployeeAddComponent implements OnInit {
   addEmployee(employeeToAdd: Employee) {
     this._service.addEmployee(employeeToAdd).then(() => {
       Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Employee Added Successfully",
-        showConfirmButton: false,
-        timer: 1500
+        position: "top-end", icon: "success", title: "Employee Added Successfully", showConfirmButton: false, timer: 1500
       })
       this._router.navigate(['/'])
     }).catch(() => {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong!"
-      })
+      Swal.fire({ icon: "error", title: "Oops...", text: "Something went wrong!" })
     })
   }
 

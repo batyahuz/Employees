@@ -15,19 +15,11 @@ export class EmployeeEditComponent {
   editEmployee(employeeToUpdate: Employee) {
     this._service.updateEmployeeById(employeeToUpdate).then(() => {
       Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Employee Edited Successfully",
-        showConfirmButton: false,
-        timer: 1500
+        position: "top-end", icon: "success", title: "Employee Edited Successfully", showConfirmButton: false, timer: 1500
       })
       this._router.navigate(['/'])
     }).catch((data) => {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: data ? data.error.text : "Something went wrong!"
-      })
+      Swal.fire({ icon: "error", title: "Oops...", text: data ? data.error.text : "Something went wrong!" })
 
     })
   }
