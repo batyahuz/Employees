@@ -10,8 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  username: string | null = null;
+
   userName: string | undefined;
   show: boolean = false;
+
+  accessToken(): string | undefined {
+    const token = sessionStorage.getItem('Authorization')
+    if (token) {
+      const base64Url = token.split('.')[1]
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+      const jsonPayload = decodeURIComponent(atob(base64)?.split('')?.map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+      }).join(''))
+      return JSON.parse(jsonPayload)['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+    }
+    else return undefined;
+  }
 
   logout() { sessionStorage.removeItem('Authorization'); }
 
@@ -23,20 +38,12 @@ export class HeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    const token = sessionStorage.getItem('Authorization')
-    if (token) {
-      const base64Url = token.split('.')[1]
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
-      const jsonPayload = decodeURIComponent(atob(base64)?.split('')?.map(function (c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-      })
-        .join('')
-      )
-      this.userName = JSON.parse(jsonPayload)['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
-      const obj = JSON.parse(jsonPayload)
-      console.log('obj', obj['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'])
-    }
-    else
-      this.userName = undefined;
+    this.username = this.accessToken();
+
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'Authorization') {
+        this.username = this.accessToken();
+      }
+    });
   }
 }
