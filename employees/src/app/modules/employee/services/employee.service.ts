@@ -9,8 +9,7 @@ import { RoleName } from '../models/role.name.model';
 })
 export class EmployeeService {
 
-  private readonly api = "api/";
-  private readonly apiEmp = this.api + "Employee";
+  private readonly apiEmp = 'api/Employee';
 
   getEmployees(options: { status?: boolean | null, query?: string | null }): Observable<Employee[]> {
     const { status, query } = options;
@@ -45,8 +44,5 @@ export class EmployeeService {
     })
   }
 
-  getRolesNames(): Observable<RoleName[]> {
-    return this._http.get<RoleName[]>(this.api + 'Role')
-  }
   constructor(private _http: HttpClient) { }
 }

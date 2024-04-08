@@ -5,6 +5,7 @@ import { Role } from '../../models/role.model';
 import { EmployeeService } from '../../services/employee.service';
 import { RoleName } from '../../models/role.name.model';
 import Swal from 'sweetalert2';
+import { RoleService } from '../../services/role.service';
 
 @Component({
   selector: 'app-employee-form',
@@ -92,7 +93,7 @@ export class EmployeeFormComponent implements OnInit {
     this.onSubmit.emit(this.employeeForm.value);
   }
 
-  constructor(private formBuilder: FormBuilder, private _service: EmployeeService) { }
+  constructor(private formBuilder: FormBuilder, private _service: RoleService) { }
 
   ngOnInit(): void {
     if (this.employee && this.rolesArray?.length == 0) {

@@ -14,9 +14,11 @@ import { EmployeeMainComponent } from './components/employee-main/employee-main.
 import { ExportEmployeeToExcelComponent } from './components/export-employee-to-excel/export-employee-to-excel.component';
 import { EmployeeSearchComponent } from './components/employee-search/employee-search.component';
 import { HeaderInterceptor } from './interceptors/header.interceptor';
+import { RoleService } from './services/role.service';
 
 @NgModule({
-  declarations: [EmplyeesTableComponent,
+  declarations: [
+    EmplyeesTableComponent,
     EmployeeAddComponent,
     EmployeeEditComponent,
     EmployeeFormComponent,
@@ -24,7 +26,8 @@ import { HeaderInterceptor } from './interceptors/header.interceptor';
     ExportEmployeeToExcelComponent,
     EmployeeSearchComponent
   ],
-  imports: [RouterModule.forChild(routes),
+  imports: [
+    RouterModule.forChild(routes),
     HttpClientModule,
     CommonModule,
     FormsModule,
@@ -32,6 +35,10 @@ import { HeaderInterceptor } from './interceptors/header.interceptor';
     MatSliderModule
     /*, MatDialogModule*/
   ],
-  providers: [EmployeeService,{ provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true }]
+  providers: [
+    EmployeeService,
+    RoleService,
+    { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true }
+  ]
 })
 export class EmployeeModule { }
