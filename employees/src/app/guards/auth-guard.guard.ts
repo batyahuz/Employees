@@ -7,10 +7,15 @@ import { UserService } from '../modules/user/services/user.service';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private _service: UserService, private _router: Router) {}
+  isLoggedIn(): boolean {
+    const token = sessionStorage.getItem('Authorization')
+    return token != null && token != '';
+  }
+
+  constructor(private _router: Router) { }
 
   canActivate(): boolean {
-    if (this._service.isLoggedIn()) {
+    if (this.isLoggedIn()) {
       return true;
     } else {
       this._router.navigate(['/login']);

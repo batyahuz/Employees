@@ -3,9 +3,10 @@ import { EmplyeesTableComponent } from './components/emplyees-table/emplyees-tab
 import { EmployeeAddComponent } from './components/employee-add/employee-add.component';
 import { EmployeeEditComponent } from './components/employee-edit/employee-edit.component';
 import { EmployeeMainComponent } from './components/employee-main/employee-main.component';
+import { AuthGuard } from '../../guards/auth-guard.guard';
 
 export const routes: Routes = [
-    { path: '', pathMatch: 'full', component: EmployeeMainComponent },
-    { path: 'add', component: EmployeeAddComponent },
-    { path: 'edit/:id', component: EmployeeEditComponent }
+    { path: '', pathMatch: 'full', component: EmployeeMainComponent, canActivate: [AuthGuard] },
+    { path: 'add', component: EmployeeAddComponent, canActivate: [AuthGuard] },
+    { path: 'edit/:id', component: EmployeeEditComponent, canActivate: [AuthGuard] }
 ];

@@ -11,7 +11,7 @@ export class UserService {
     return new Promise((res, rej) => this._http.post(this.route, user)
       .subscribe({
         next: (data: any) => {
-          this.setSessionStorage(data.token)
+          this.setSessionStorage(data.token, user.name)
           res(data)
         }, error: (error) => {
           rej(error)
@@ -19,13 +19,9 @@ export class UserService {
       }))
   }
 
-  isLoggedIn(): boolean {
-    const token = sessionStorage.getItem('Authorization')
-    return token != null && token != '';
-  }
-
-  private setSessionStorage(data: string) {
-    sessionStorage.setItem('Authorization', data)
+  private setSessionStorage(token: string, name: string) {
+    sessionStorage.setItem('Authorization', token)
+    sessionStorage.setItem('userName', name)
   }
 
   constructor(private _http: HttpClient) { }
