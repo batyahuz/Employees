@@ -19,6 +19,11 @@ export class UserService {
       }))
   }
 
+  isLoggedIn(): boolean {
+    const token = sessionStorage.getItem('Authorization')
+    return token != null && token != '';
+  }
+
   private setSessionStorage(data: string) {
     sessionStorage.setItem('Authorization', data)
   }
