@@ -16,6 +16,7 @@ import { EmployeeSearchComponent } from './components/employee-search/employee-s
 import { HeaderInterceptor } from './interceptors/header.interceptor';
 import { RoleService } from './services/role.service';
 import { InputFieldComponent } from '../../components/input-field-component/input-field.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -34,8 +35,8 @@ import { InputFieldComponent } from '../../components/input-field-component/inpu
     FormsModule,
     ReactiveFormsModule,
     MatSliderModule,
-    InputFieldComponent
-    /*, MatDialogModule*/
+    InputFieldComponent,
+    MatDialogModule
   ],
   providers: [
     EmployeeService,

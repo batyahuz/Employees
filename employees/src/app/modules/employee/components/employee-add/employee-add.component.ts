@@ -3,6 +3,7 @@ import { Employee } from '../../models/employee.model';
 import { EmployeeService } from '../../services/employee.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-employee-add',
@@ -23,7 +24,14 @@ export class EmployeeAddComponent implements OnInit {
     })
   }
 
-  constructor(private _service: EmployeeService, private _router: Router) { }
+  closeDialog(): void {
+    this.dialogRef.close()
+  }
+
+  constructor(
+    public dialogRef: MatDialogRef<EmployeeAddComponent>,
+    private _service: EmployeeService,
+     private _router: Router) { }
 
   ngOnInit(): void {
     this.employee = new Employee()
