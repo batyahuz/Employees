@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { EmployeeModule } from './employee/employee.module';
+import { EmployeeModule } from '../../employee/employee.module';
 import { CommonModule } from '@angular/common';
 
 @Component({
