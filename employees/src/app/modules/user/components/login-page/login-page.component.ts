@@ -29,7 +29,7 @@ export class LoginPageComponent {
     this._service.login(this.userForm.value)
       .then(() => {
         Swal.fire({
-          position: "top-end", icon: "success", title: "Employee Added Successfully", showConfirmButton: false, timer: 1500
+          position: "top-end", title: "Hi! ", showConfirmButton: false, timer: 1500
         })
         this._router.navigate(['/'])
       })
