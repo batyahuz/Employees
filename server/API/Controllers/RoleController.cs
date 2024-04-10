@@ -9,7 +9,7 @@ namespace Solid.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class RoleController(IRoleService service) : ControllerBase
     {
         private readonly IRoleService _service = service;

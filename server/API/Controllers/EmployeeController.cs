@@ -16,7 +16,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class EmployeeController(IEmployeeService service, IMapper mapper) : ControllerBase
     {
         private readonly IEmployeeService _service = service;
