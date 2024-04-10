@@ -50,26 +50,16 @@ export class EmployeeMainComponent implements OnInit {
 
   deleteEmployee(id: number): void {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this._service.deleteEmployeeById(id).then(() => this.getEmployees())
-        Swal.fire({
-          position: "bottom-end",
-          title: "Deleted!",
-          text: "Employee has been deleted.",
-          icon: "success",
-          showConfirmButton: false,
-          timer: 1000
-        });
-      }
-    });
+      title: "Are you sure?", text: "You won't be able to revert this!", icon: "warning", showCancelButton: true, confirmButtonColor: "#3085d6", cancelButtonColor: "#d33", confirmButtonText: "Yes, delete it!"
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          this._service.deleteEmployeeById(id).then(() => this.getEmployees())
+          Swal.fire({
+            position: "bottom-end", title: "Deleted!", text: "Employee has been deleted.", icon: "success", showConfirmButton: false, timer: 1000
+          });
+        }
+      });
   }
 
   filterEmployees(value: Employee[]): void {
@@ -80,20 +70,5 @@ export class EmployeeMainComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEmployees()
-
-    // this._router.events
-    //   .pipe(filter(event => event instanceof NavigationEnd))
-    //   .subscribe((event) => {
-    //     if (typeof (event) == typeof (NavigationEnd)) {
-    //       if ((event as NavigationEnd).url.includes('/add')) {
-    //         console.log('open edit');
-    //         this.openAddEmployeeDialog();
-    //       }
-    //       else if ((event as NavigationEnd).url.includes('/edit')) {
-    //         console.log('open edit');
-    //         this.openEditEmployeeDialog();
-    //       }
-    //     }
-    //   });
   }
 }

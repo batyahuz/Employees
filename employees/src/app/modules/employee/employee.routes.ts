@@ -5,7 +5,5 @@ import { EmployeeMainComponent } from './components/employee-main/employee-main.
 import { AuthGuard } from '../../guards/auth-guard.guard';
 
 export const routes: Routes = [
-    { path: '', pathMatch: 'full', component: EmployeeMainComponent, canActivate: [AuthGuard] }//,
-    // { path: 'add', component: EmployeeAddComponent, canActivate: [AuthGuard] },
-    // { path: 'edit/:id', component: EmployeeEditComponent, canActivate: [AuthGuard] }
+    { path: '', pathMatch: 'full', component: EmployeeMainComponent, canActivate: [AuthGuard] }
 ];
